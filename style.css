@@ -1,0 +1,33 @@
+body {
+    background-color: black;
+    ;
+}
+
+.card-img-top {
+    width: 30px;
+    margin-right: 15px;
+    padding: 3px;
+    border: 1px solid lightblue;
+}
+
+code {
+    color: darkorange;
+    font-size: 0.75rem;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+    overflow: scroll;
+    
+}
+
+#searchCurrency {
+    margin-top: 0px;
+}
+
+.col-form-label {
+    align-self: center;
+}
+

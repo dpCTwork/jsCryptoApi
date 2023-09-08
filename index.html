@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Inter" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/monzanifabio/cryptofont/cryptofont.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous" defer></script>
+    <script src="secret.js" defer></script>
+    <!-- <script src="main.js" defer></script> -->
+    <script src="main.js" defer></script>
+    <title>CryptoCompare API Project</title>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark py-3 text-info">
+        <div class="container-fluid">
+            <a href="#">
+                <i class="bx bxl-bitcoin text-info" style="font-size: 2rem; margin: 0px 20px 0px 10px;"></i>
+                <!-- color: rgb(73, 226, 193); -->
+            </a>
+            <a class="navbar-brand me-auto text-info" href="#">
+                Crypto Tracker
+            </a>
+            <button class="navbar-toggler border-info" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navmenu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a href="#top3" class="nav-link"><i class="bi bi-graph-up me-3"></i>Top 3 in Market Value</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#search" class="nav-link"><i class="bi bi-search me-3"></i>Search for Currency</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#portfolio" class="nav-link"><i class="bi bi-wallet me-3"></i>Your Cryptocurrencies</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Header -->
+    <!-- Top 3 cryptocurrencies by market cap -->
+    <section class="top3">
+        <div class="card-group p-5">
+            <div class="card border-info bg-dark text-light">
+                <div class="card-body">
+                    <h5 class="card-title text-center" id="card-title-1"><img src="" class="card-img-top rounded" alt="" id="card-img-1"></h5>
+                    <p class="card-text text-center">
+                        <ul>
+                            <code style="text-align: center;">
+                        <li>Current Price: <span style='color: greenyellow'>${coin}</span></li>
+                            </code>
+                        </ul>
+                    </p>
+                </div>
+                <div class="card-footer border-info">
+                    <small class="text-body-light">Last updated 3 mins ago</small>
+                </div>
+            </div>
+            <div class="card border-info bg-dark text-light">
+                <div class="card-body">
+                    <h5 class="card-title text-center" id="card-title-2"><img src="" class="card-img-top rounded" alt="" id="card-img-2"></h5>
+                    <p class="card-text">place holder text</p>
+                </div>
+                <div class="card-footer border-info">
+                    <small class="text-body-light">Last updated 3 mins ago</small>
+                </div>
+            </div>
+            <div class="card border-info bg-dark text-light">
+                
+                <div class="card-body">
+                    <h5 class="card-title text-center" id="card-title-3"><img src="" class="card-img-top rounded" alt="" id="card-img-3"></h5>
+                    <p class="card-text">place holder text</p>
+                </div>
+                <div class="card-footer border-info">
+                    <small class="text-body-light">Last updated 3 mins ago</small>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Form to search crypto and compare crypto (up to 3)-->
+
+    <!-- <form class="container-fluid row g-1 m-sm-3 m-md-5 p-2"> -->
+    <form class="container-fluid p-5" id="search">
+        <div class="row mx-2">
+            <div class="row-col-form-label col-sm-4 col-md-3 col-xl-2 text-light py-2 ps-0 align-self-center text-lg-end text-md-center pe-lg-5">
+                Search Currencies:
+            </div>
+            <div class="row-col-sm-7 col-md-8 text-light py-2 pe-md-5 ps-0">
+                <input type="text" class="form-control form-text bg-dark text-light border-info" id="searchCurrency" placeholder="Bitcoin, Ethereum, DogeCoin, etc.">
+            </div>
+            <!-- <div class="col-form-check"></div> -->
+        </div>
+        <div class="row mx-2">
+            <div class="col-md-3 col-xl-2"></div>
+            <div class="form-check col-sm-7 col-md-8 py-2">
+                <input class="form-check-input border-info bg-dark" type="checkbox" value="" id="saveToPortfolio">
+                <label class="form-check-label text-light ms-2" for="saveToPortfolio">
+                    Save to your portfolio
+                </label>
+            </div>
+        </div>
+    </form>
+    
+    <!-- Search results -->
+    <div class="container m-5">
+        <table class="table table-bordered border-info table-striped table-striped-columns table-hover table-group-divider caption-top table-responsive" id="portfolio">
+            <caption class="text-light">Your saved cryptocurrencies</caption>
+            <thead class="table-info">
+                
+            </thead>
+        </table>
+    </div>
+
+    <!-- Your Portfolio -->
+
+    <!-- Footer -->
+    <footer class="p-4 bg-black text-white text-center position-relative">
+        <div class="container-fluid">
+            <img src="/img/cryptocompare/dark/PNG24.png" alt="Reference to CryptoCompare for API usage" style="margin-bottom: 20px;">
+            <p style="font-size: medium;">Copyright &copy; David Park 2023</p>
+            <a href="#" class="position-fixed bottom-0 end-0 p-4 text-info">
+                <i class="bx bx-up-arrow-circle bx-fade-up-hover h1"></i>
+            </a>
+        </div>
+    </footer>
+    
+</body>
+</html>
