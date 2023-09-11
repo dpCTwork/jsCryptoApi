@@ -1,6 +1,5 @@
 body {
     background-color: black;
-    ;
 }
 
 .card-img-top {
@@ -12,7 +11,7 @@ body {
 
 code {
     color: darkorange;
-    font-size: 0.75rem;
+    font-size: .8rem;
 }
 
 ul {
@@ -23,11 +22,21 @@ ul {
     
 }
 
+.bxs-info-circle {
+    font-size: 0.75rem;
+    color: rgb(0, 225, 255);
+    margin: 2px 0px auto 2px;
+}
+
 #searchCurrency {
     margin-top: 0px;
 }
 
 .col-form-label {
     align-self: center;
+}
+
+#cclogo-footer {
+    margin-bottom: 20px;
 }
 

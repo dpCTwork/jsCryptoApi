@@ -19,7 +19,7 @@
     <title>CryptoCompare API Project</title>
 </head>
 <body>
-    <nav class="navbar navbar-dark bg-dark py-3 text-info">
+    <nav class="navbar navbar-dark sticky-top bg-dark py-3 text-info">
         <div class="container-fluid">
             <a href="#">
                 <i class="bx bxl-bitcoin text-info" style="font-size: 2rem; margin: 0px 20px 0px 10px;"></i>
@@ -49,40 +49,75 @@
     
     <!-- Header -->
     <!-- Top 3 cryptocurrencies by market cap -->
-    <section class="top3">
+    <section id="top3">
         <div class="card-group p-5">
             <div class="card border-info bg-dark text-light">
                 <div class="card-body">
                     <h5 class="card-title text-center" id="card-title-1"><img src="" class="card-img-top rounded" alt="" id="card-img-1"></h5>
-                    <p class="card-text text-center">
+                    <code class="card-text text-center">
                         <ul>
-                            <code style="text-align: center;">
-                        <li>Current Price: <span style='color: greenyellow'>${coin}</span></li>
-                            </code>
+                            <li>Market Cap: <span class="mcaps" style='color: rgb(255, 255, 0);'></span></li>
+                            <li>Current Price: <span class="prices" style='color: rgb(85, 255, 45);'></span></li>
+                            <li>Change % 24hr: <span class="price-change-pct" style='color: rgb(85, 255, 45);'></span></li>
+                            <li>Volume (24hr)
+                                <span id="vol-info">
+                                    <a tabindex="0" class="bx bxs-info-circle" data-bs-placement="auto" data-bs-toggle="popover" data-bs-trigger="focus"
+                                        data-bs-title="Info"
+                                        data-bs-content="Trading volume over the past 24 hours" style="text-decoration: none;"></a>
+                                </span>: 
+                                <span class="vols24hr" style='color: greenyellow'></span></li>
+                            <li>Circulating Supply: <span class="supplies" style='color: greenyellow'></span></li>
                         </ul>
-                    </p>
+                    </code>
                 </div>
                 <div class="card-footer border-info">
-                    <small class="text-body-light">Last updated 3 mins ago</small>
+                    <code class="text-body-light text-secondary">Last updated: <span class="update-time"></span></code>
                 </div>
             </div>
             <div class="card border-info bg-dark text-light">
                 <div class="card-body">
                     <h5 class="card-title text-center" id="card-title-2"><img src="" class="card-img-top rounded" alt="" id="card-img-2"></h5>
-                    <p class="card-text">place holder text</p>
+                    <code class="card-text text-center">
+                        <ul>
+                            <li>Market Cap: <span class="mcaps" style='color: rgb(255, 255, 0)'></span></li>
+                            <li>Current Price: <span class="prices"></span></li>
+                            <li>Change % 24hr: <span class="price-change-pct"></span></li>
+                            <li>Volume (24hr)
+                                <span id="vol-info">
+                                    <a tabindex="0" class="bx bxs-info-circle" data-bs-placement="auto" data-bs-toggle="popover" data-bs-trigger="focus"
+                                        data-bs-title="Info"
+                                        data-bs-content="Total trading volume over the past 24 hours" style="text-decoration: none;"></a>
+                                </span>: 
+                                <span class="vols24hr"></span></li>
+                            <li>Circulating Supply: <span class="supplies"></span></li>
+                        </ul>
+                    </code>
                 </div>
                 <div class="card-footer border-info">
-                    <small class="text-body-light">Last updated 3 mins ago</small>
+                    <code class="text-body-light text-secondary">Last updated: <span class="update-time"></span></code>
                 </div>
             </div>
             <div class="card border-info bg-dark text-light">
-                
                 <div class="card-body">
                     <h5 class="card-title text-center" id="card-title-3"><img src="" class="card-img-top rounded" alt="" id="card-img-3"></h5>
-                    <p class="card-text">place holder text</p>
+                    <code class="card-text text-center">
+                        <ul>
+                            <li>Market Cap: <span class="mcaps" style='color: rgb(255, 255, 0)'></span></li>
+                            <li>Current Price: <span class="prices" style='color: rgb(85, 255, 45);'></span></li>
+                            <li>Change % 24hr: <span class="price-change-pct" style='color: rgb(85, 255, 45);'></span></li>
+                            <li>Volume (24hr)
+                                <span id="vol-info">
+                                    <a tabindex="0" class="bx bxs-info-circle" data-bs-placement="auto" data-bs-toggle="popover" data-bs-trigger="focus"
+                                        data-bs-title="Info"
+                                        data-bs-content="Trading volume over the past 24 hours" style="text-decoration: none;"></a>
+                                </span>: 
+                                <span class="vols24hr" style='color: greenyellow'></span></li>
+                            <li>Circulating Supply: <span class="supplies" style='color: greenyellow'></span></li>
+                        </ul>
+                    </code>
                 </div>
                 <div class="card-footer border-info">
-                    <small class="text-body-light">Last updated 3 mins ago</small>
+                    <code class="text-body-light text-secondary">Last updated: <span class="update-time"></span></code>
                 </div>
             </div>
         </div>
@@ -112,8 +147,8 @@
     </form>
     
     <!-- Search results -->
-    <div class="container m-5">
-        <table class="table table-bordered border-info table-striped table-striped-columns table-hover table-group-divider caption-top table-responsive" id="portfolio">
+    <div class="container-fluid px-5 my-2">
+        <table class="table table-bordered border-info table-striped table-striped-columns table-hover table-group-divider caption-top table-responsive mt-0" id="portfolio">
             <caption class="text-light">Your saved cryptocurrencies</caption>
             <thead class="table-info">
                 
@@ -125,8 +160,8 @@
 
     <!-- Footer -->
     <footer class="p-4 bg-black text-white text-center position-relative">
-        <div class="container-fluid">
-            <img src="/img/cryptocompare/dark/PNG24.png" alt="Reference to CryptoCompare for API usage" style="margin-bottom: 20px;">
+        <div class="container-fluid mt-4">
+            <img src="/img/cryptocompare/dark/PNG24.png" alt="Reference to CryptoCompare for API usage" id="cclogo-footer">
             <p style="font-size: medium;">Copyright &copy; David Park 2023</p>
             <a href="#" class="position-fixed bottom-0 end-0 p-4 text-info">
                 <i class="bx bx-up-arrow-circle bx-fade-up-hover h1"></i>
@@ -134,5 +169,6 @@
         </div>
     </footer>
     
+
 </body>
 </html>
