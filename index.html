@@ -14,7 +14,6 @@
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous" defer></script>
     <script src="secret.js" defer></script>
-    <!-- <script src="main.js" defer></script> -->
     <script src="main.js" defer></script>
     <title>CryptoCompare API Project</title>
 </head>
@@ -50,7 +49,7 @@
     <!-- Header -->
     <!-- Top 3 cryptocurrencies by market cap -->
     <section id="top3">
-        <div class="card-group p-5">
+        <div class="card-group p-5 px-sm-3">
             <div class="card border-info bg-dark text-light">
                 <div class="card-body">
                     <h5 class="card-title text-center" id="card-title-1"><img src="" class="card-img-top rounded" alt="" id="card-img-1"></h5>
@@ -130,12 +129,16 @@
             <div class="row-col-form-label col-sm-4 col-md-3 col-xl-2 text-light py-2 ps-0 align-self-center text-lg-end text-md-center pe-lg-5">
                 Search Currencies:
             </div>
-            <div class="row-col-sm-7 col-md-8 text-light py-2 pe-md-5 ps-0">
-                <input type="text" class="form-control form-text bg-dark text-light border-info" id="searchCurrency" placeholder="Bitcoin, Ethereum, DogeCoin, etc.">
+            <div class="row-col-sm-7 col-md-8 py-2 pe-md-5 ps-0">
+                <input type="text" class="form-control bg-dark text-light border-info" id="searchCurrency" placeholder="Search by symbol">
+                <!-- <input type="text" class="form-control bg-dark text-light border-info" id="searchCurrency" list="cryptoDatalist" autocomplete="on" placeholder="Search by name or symbol">
+                <datalist id="cryptoDatalist"></datalist> -->
             </div>
-            <!-- <div class="col-form-check"></div> -->
+            <div class="col-sm-1 col-md-1 px-0 py-2 align-self-center">
+                <button type="submit" id="searchButton" class="btn btn-sm btn-info">Search</button>
+            </div>
         </div>
-        <div class="row mx-2">
+        <!-- <div class="row mx-2">
             <div class="col-md-3 col-xl-2"></div>
             <div class="form-check col-sm-7 col-md-8 py-2">
                 <input class="form-check-input border-info bg-dark" type="checkbox" value="" id="saveToPortfolio">
@@ -143,16 +146,31 @@
                     Save to your portfolio
                 </label>
             </div>
-        </div>
+        </div> -->
     </form>
     
     <!-- Search results -->
-    <div class="container-fluid px-5 my-2">
-        <table class="table table-bordered border-info table-striped table-striped-columns table-hover table-group-divider caption-top table-responsive mt-0" id="portfolio">
-            <caption class="text-light">Your saved cryptocurrencies</caption>
-            <thead class="table-info">
-                
+    <div class="container-fluid px-md-5 my-2">
+        <table class="table table-success table-bordered border-info table-striped table-hover table-group-divider caption-top table-responsive mt-0" id="portfolio">
+            <caption class="text-light px-2">Your saved cryptocurrencies</caption>
+            <thead style="font-size: small;">
+                <tr style="text-align: center;">
+                    <th scope="col">Coin</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">High/Low (24hr)</th>
+                    <th scope="col">Change % (24hr)</th>
+                    <th scope="col">Circulating Supply</th>
+                </tr>
             </thead>
+            <tbody style="font-size: small;">
+                <tr>
+                        <th id="table-coin" scope="row"></th>
+                        <td id="price"></td>
+                        <td id="hi-lo-24hr"></td>
+                        <td id="chg-pct-24"></td>
+                        <td id="c-supply"></td>
+                    </tr>
+            </tbody>
         </table>
     </div>
 

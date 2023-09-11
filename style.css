@@ -30,6 +30,12 @@ ul {
 
 #searchCurrency {
     margin-top: 0px;
+    font-size: 0.9rem;
+}
+#searchCurrency::placeholder {
+    color: rgb(255, 255, 255);
+    opacity: 0.3;
+    font-size: 0.9rem;
 }
 
 .col-form-label {
@@ -39,4 +45,3 @@ ul {
 #cclogo-footer {
     margin-bottom: 20px;
 }
-

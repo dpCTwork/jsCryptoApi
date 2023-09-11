@@ -1,10 +1,11 @@
 console.log('hello world')
 
+// Added info tooltip popover to explain what the data is a bit more.
 const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
 const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
 
-async function getData() {
-    const response = await fetch('https://min-api.cryptocompare.com/data/all/coinlist', {
+async function getCoinsSummary() {
+    const response = await fetch('https://min-api.cryptocompare.com/data/all/coinlist?summary=true', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -49,7 +50,7 @@ async function getImgUrl(coin) {
     }
 }
 
-async function setTop3CardImgs(){
+async function setTop3Cards(){
     const top3 = await getTop3MarketCap()
     for (let i = 0; i < top3.Data.length; i++) {
         const imgUrl = await getImgUrl(top3.Data[i].CoinInfo.Name)
@@ -58,7 +59,7 @@ async function setTop3CardImgs(){
         let cardImg = document.querySelector(`#card-img-${i + 1}`)
         cardImg.src = imgUrl
         cardImg.alt = top3.Data[i].CoinInfo.Name
-        console.log(cardImg)
+        // console.log(cardImg)
     };
     const mcaps = document.querySelectorAll('.mcaps')
     for (let i = 0; i < mcaps.length; i++) {
@@ -72,7 +73,6 @@ async function setTop3CardImgs(){
     };
     const priceChanges = document.querySelectorAll('.price-change-pct')
     for (let i = 0; i < prices.length; i++) {
-        top3.Data[i].DISPLAY.USD.CHANGEPCT24HOUR
         priceChanges[i].insertAdjacentText('beforeend', `${top3.Data[i].DISPLAY.USD.CHANGEPCT24HOUR}`)
         if (top3.Data[i].DISPLAY.USD.CHANGEPCT24HOUR < 0) {
             priceChanges[i].style.color = 'red'
@@ -98,21 +98,50 @@ async function setTop3CardImgs(){
     
 };
 
-setTop3CardImgs()
+setTop3Cards()
 
-// const mcaps = document.querySelectorAll('.mcap')
-// mcaps.forEach(i => i.insertAdjacentText('beforeend', '1'))
 
-// let number = 987654321987;
+// Commented out, but saved for later use, in case I want to add the datalist functionality to the search field
 
-// let formatter = new Intl.NumberFormat('en-US', {
-//     style: 'currency',
-//     currency: 'USD',
-//     notation: 'compact',
-//     compactDisplay: 'short',
-//     minimumFractionDigits: 2,
-// });
+// async function setDatalistItems() {
+//     const data = await getCoinsSummary()
+//     const datalist = document.querySelector('#cryptoDatalist')
+//     for (let i = 0; i < data.Data.length; i++) {
+//         let option = document.createElement('option')
+//         option.value = Object.entries(data.Data[i][1].FullName)
+//         datalist.appendChild(option)
+//     }
+   
+// }
+// setDatalistItems()
 
-// let formattedNumber = formatter.format(number);
+async function getCoinData(coin) {
+    coin.preventDefault()
+    const inputData = document.querySelector('#searchCurrency').value
+    const response = await fetch(`https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${inputData}&tsyms=USD`, {
+        method: "GET",
+        headers: { 
+            'Content-Type': 'application/json',
+            'authorization': 'Apikey ' + cryptoCompareApiKey 
+        }
+    })
+    if (response.ok) {
+        const data = await response.json()
+        const tableCoin = document.querySelector('#table-coin')
+        const price = document.querySelector('#price')
+        const hiLo24hr = document.querySelector('#hi-lo-24hr')
+        const pctChg24hr = document.querySelector('#chg-pct-24')
+        const supply = document.querySelector('#c-supply')
+        console.log(data)
+        console.log(inputData)
+        tableCoin.insertAdjacentText('beforeend', `${inputData}`)
+        price.insertAdjacentText('beforeend', `${await data.DISPLAY[`${inputData}`].USD.PRICE}`)
+        hiLo24hr.insertAdjacentText('beforeend', `${await data.DISPLAY[`${inputData}`].USD.HIGH24HOUR} / ${await data.DISPLAY[`${inputData}`].USD.LOW24HOUR}`)
+        pctChg24hr.insertAdjacentText('beforeend', `${await data.DISPLAY[`${inputData}`].USD.CHANGEPCT24HOUR}`)
+        supply.insertAdjacentText('beforeend', `${await data.DISPLAY[`${inputData}`].USD.CIRCULATINGSUPPLY}`)
+    }
+}
 
-// console.log(formattedNumber);
+let form = document.querySelector('form')
+form.addEventListener('submit', getCoinData)
+// getCoinData('BTC')
