@@ -138,21 +138,21 @@
                 <button type="submit" id="searchButton" class="btn btn-sm btn-info">Search</button>
             </div>
         </div>
-        <!-- <div class="row mx-2">
+        <div class="row mx-2">
             <div class="col-md-3 col-xl-2"></div>
             <div class="form-check col-sm-7 col-md-8 py-2">
-                <input class="form-check-input border-info bg-dark" type="checkbox" value="" id="saveToPortfolio">
-                <label class="form-check-label text-light ms-2" for="saveToPortfolio">
+                <input class="form-check-input border-info bg-dark" type="checkbox" value="" id="checkbox">
+                <label class="form-check-label text-light ms-2" for="checkbox">
                     Save to your portfolio
                 </label>
             </div>
-        </div> -->
+        </div>
     </form>
     
     <!-- Search results -->
     <div class="container-fluid px-md-5 my-2">
-        <table class="table table-success table-bordered border-info table-striped table-hover table-group-divider caption-top table-responsive mt-0" id="portfolio">
-            <caption class="text-light px-2">Your saved cryptocurrencies</caption>
+        <table class="table table-success table-bordered border-info table-striped table-hover table-group-divider caption-top table-responsive mt-0" id="res-table">
+            <caption class="text-light px-2">Search Results</caption>
             <thead style="font-size: small;">
                 <tr style="text-align: center;">
                     <th scope="col">Coin</th>
@@ -162,9 +162,9 @@
                     <th scope="col">Circulating Supply</th>
                 </tr>
             </thead>
-            <tbody style="font-size: small;">
+            <tbody id="res-row" style="font-size: small;">
                 <tr>
-                        <th id="table-coin" scope="row"></th>
+                        <th id="coin" scope="row"></th>
                         <td id="price"></td>
                         <td id="hi-lo-24hr"></td>
                         <td id="chg-pct-24"></td>
@@ -175,6 +175,32 @@
     </div>
 
     <!-- Your Portfolio -->
+
+    <div class="container-fluid px-md-5 my-2">
+        <table
+            class="table table-success table-bordered border-info table-striped table-hover table-group-divider caption-top table-responsive mt-0"
+            id="saved-table">
+            <caption class="text-light px-2">Your saved cryptocurrencies</caption>
+            <thead style="font-size: small;">
+                <tr style="text-align: center;">
+                    <th scope="col">Coin</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">High/Low (24hr)</th>
+                    <th scope="col">Change % (24hr)</th>
+                    <th scope="col">Circulating Supply</th>
+                </tr>
+            </thead>
+            <tbody id="saved-row" style="font-size: small;">
+                <tr>
+                    <th id="saved-coin" scope="row"></th>
+                    <td id="saved-price"></td>
+                    <td id="saved-hi-lo-24hr"></td>
+                    <td id="saved-chg-pct-24"></td>
+                    <td id="saved-c-supply"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
     <!-- Footer -->
     <footer class="p-4 bg-black text-white text-center position-relative">

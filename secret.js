@@ -1,0 +1,1 @@
+const cryptoCompareApiKey = '078fe69c224d3ebf10d8e1e614b740697853dfa2b60fbd0aab22f4241937bc6a'

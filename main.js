@@ -115,9 +115,33 @@ setTop3Cards()
 // }
 // setDatalistItems()
 
+function addRow(resRowNum) {
+    console.log(`before adding row, the param passed in is 'resTable.rows.length', which is: ${resRowNum}`)
+    const resTable = document.querySelector(`#res-table`)
+	const resRow = document.querySelector(`#res-row`)
+	const newRow = resRow.cloneNode(true)
+	newRow.id = `res-row-${resRowNum}`
+	resTable.appendChild(newRow)
+    
+    const coinName = document.querySelector(`#coin`)
+    const price = document.querySelector(`#price`)
+    const hiLo24hr = document.querySelector(`#hi-lo-24hr`)
+    const pctChg24hr = document.querySelector(`#chg-pct-24`)
+    const supply = document.querySelector(`#c-supply`)
+    coinName.id += `-${resRowNum}`
+    price.id += `-${resRowNum}`
+    hiLo24hr.id += `-${resRowNum}`
+    pctChg24hr.id += `-${resRowNum}`
+    supply.id += `-${resRowNum}`
+}
+
+const resTable = document.querySelector(`#res-table`)
+console.log(resTable.rows.length)
+
 async function getCoinData(coin) {
     coin.preventDefault()
     const inputData = document.querySelector('#searchCurrency').value
+    const saveCheckbox = document.querySelector('#checkbox').value
     const response = await fetch(`https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${inputData}&tsyms=USD`, {
         method: "GET",
         headers: { 
@@ -125,23 +149,36 @@ async function getCoinData(coin) {
             'authorization': 'Apikey ' + cryptoCompareApiKey 
         }
     })
+    
+    
     if (response.ok) {
+        console.log(`before addrow function: the row length is ${resTable.rows.length}`)
+        addRow(resTable.rows.length)
         const data = await response.json()
-        const tableCoin = document.querySelector('#table-coin')
-        const price = document.querySelector('#price')
-        const hiLo24hr = document.querySelector('#hi-lo-24hr')
-        const pctChg24hr = document.querySelector('#chg-pct-24')
-        const supply = document.querySelector('#c-supply')
+        console.log(`after the addrow func, including the new row, we have: ${resTable.rows.length} rows`)
+        const coinName = document.querySelector(`#coin-${resTable.rows.length-1}`)
+        const price = document.querySelector(`#price-${resTable.rows.length-1}`)
+        const hiLo24hr = document.querySelector(`#hi-lo-24hr-${resTable.rows.length-1}`)
+        const pctChg24hr = document.querySelector(`#chg-pct-24-${resTable.rows.length-1}`)
+        const supply = document.querySelector(`#c-supply-${resTable.rows.length-1}`)
+        
+    
         console.log(data)
         console.log(inputData)
-        tableCoin.insertAdjacentText('beforeend', `${inputData}`)
-        price.insertAdjacentText('beforeend', `${await data.DISPLAY[`${inputData}`].USD.PRICE}`)
-        hiLo24hr.insertAdjacentText('beforeend', `${await data.DISPLAY[`${inputData}`].USD.HIGH24HOUR} / ${await data.DISPLAY[`${inputData}`].USD.LOW24HOUR}`)
-        pctChg24hr.insertAdjacentText('beforeend', `${await data.DISPLAY[`${inputData}`].USD.CHANGEPCT24HOUR}`)
-        supply.insertAdjacentText('beforeend', `${await data.DISPLAY[`${inputData}`].USD.CIRCULATINGSUPPLY}`)
-    }
+        console.log(`table len after addrow function, which added a new row with empty content: ${resTable.rows.length}`)
+
+        coinName.insertAdjacentText('beforeend', `${inputData.toUpperCase()}`)
+        price.insertAdjacentText('beforeend', `${await data.DISPLAY[`${inputData.toUpperCase()}`].USD.PRICE}`)
+        hiLo24hr.insertAdjacentText('beforeend', `${await data.DISPLAY[`${inputData.toUpperCase()}`].USD.HIGH24HOUR} / ${await data.DISPLAY[`${inputData.toUpperCase()}`].USD.LOW24HOUR}`)
+        pctChg24hr.insertAdjacentText('beforeend', `${await data.DISPLAY[`${inputData.toUpperCase()}`].USD.CHANGEPCT24HOUR}`)
+        supply.insertAdjacentText('beforeend', `${await data.DISPLAY[`${inputData.toUpperCase()}`].USD.CIRCULATINGSUPPLY}`)
+        
+    } 
 }
+
+
 
 let form = document.querySelector('form')
 form.addEventListener('submit', getCoinData)
+
 // getCoinData('BTC')
